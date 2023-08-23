@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block css %}
+
     <link href="{% static 'vendor/css/index.css' %} " rel="stylesheet">
 {% endblock %}
 
@@ -18,7 +19,7 @@
                         <b>Интернет-магазин тюнинг деталей и аксессуаров для автомобилей Tank 300 и Tank 500 в Санкт-Петербурге</b>
                     </p>
                     <button id="start-purchase-btn" type="button" class="btn btn-lg">
-                        <a id="start-purchase-link" href="{% url 'products' %}">
+                        <a id="start-purchase-link" href="{% url 'products:index' %}">
                             Начать покупки
                         </a>
                     </button>

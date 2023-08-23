@@ -4,7 +4,7 @@
 {% block css %}
     <link href="{% static 'vendor/css/products.css' %}" rel="stylesheet">
 {% endblock %}
-
+{% block contact_me %}  <a class="nav-link" href="#contacts">Связаться с нами</a> {% endblock %}
 {% block content %}
     <div class="container">
 
@@ -12,13 +12,13 @@
 
             <div class="col-lg-3">
 
-                <h1 class="my-4">Tank Tuning <b>SPB</b></h1>
+                <h2 class="my-4">Tank Tuning <b>SPB</b></h2>
+
+
                 <div class="list-group">
-                    <a href="#" class="list-group-item">Новинки</a>
-                    <a href="#" class="list-group-item">Одежда</a>
-                    <a href="#" class="list-group-item">Обувь</a>
-                    <a href="#" class="list-group-item">Аксессуары</a>
-                    <a href="#" class="list-group-item">Подарки</a>
+                    {% for category in categories %}
+                        <a href="#" class="list-group-item">{{ category.name }}</a>
+                    {% endfor %}
                 </div>
 
             </div>
@@ -60,8 +60,7 @@
                         <div class="card h-100">
                             <a href="#">
                                 <img class="card-img-top"
-                                     src="{{ product.image }}"
-                                     title="{{ product.title }}"
+                                     src="{{ product.image.url }}"
                                      alt="">
 
                             </a>
@@ -73,7 +72,10 @@
                                 <p class="card-text">{{ product.description }}</p>
                             </div>
                             <div class="card-footer text-center">
-                                <button type="button" class="btn btn-outline-success">Добавить в корзину</button>
+                                <a  class="btn btn-outline-success"
+                                    href="{% url 'products:basket_add' product.id %}">
+                                    Добавить в корзину
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -106,6 +108,17 @@
 {% block footer %}
     <footer class="py-5 bg-dark">
         <div class="container">
+            <h5 id="contacts" class="m-0 text-center text-white"><b>Контакты:</b> <br> +7(812)987-18-69 <br> +7(952)287-18-69</h5>
+            <div class="m-0 text-center text-whiten">
+                <a href="https://wa.me/7123456789"><img src="{% static 'vendor/img/whatsapp-logo.png' %}">
+                &nbsp;
+                <a href="https://web.telegram.org/">
+                    <img src="{% static 'vendor/img/tg-image-color.png' %}"/>
+                &nbsp;
+                <a href="https://www.avito.ru/user/13487b14127cd8e68481566569302874/profile?id=3182369205&src=item&page_from=from_item_card&iid=3182369205">
+                    <img src="{% static 'vendor/img/avito-logo.png' %}"/></a>
+            </div>
+
             <p class="m-0 text-center text-white">Copyright &copy; TankTuningSPB 2023</p>
 
         </div>

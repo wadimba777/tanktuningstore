@@ -1,0 +1,17 @@
+[
+  {
+    "model": "products.productscategory",
+    "pk": 1,
+    "fields": {
+      "name": "Запчасти",
+      "description": "Вот такая она, нужна на всякий случай."
+    }
+  },
+  {
+    "model": "products.productscategory",
+    "pk": 2,
+    "fields": {
+      "name": "Акссесуары", "description": null
+    }
+  }
+]

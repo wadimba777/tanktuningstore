@@ -1,0 +1,95 @@
+[
+  {
+    "model": "products.product",
+    "pk": 1,
+    "fields": {
+      "name": "Крышка запасного колеса",
+      "description": "Обеспечивает защиту от внешних факторов и кражи.",
+      "price": "34999",
+      "quantity": 5,
+      "image": "products_images/spare_wheelshell.png",
+      "category": 1
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 2, "fields": {
+    "name": "Решетка радиатора Tank 300",
+    "description": "Абсолютно новая, глянцевая, с электроникой. Отверстия в решетке небольшие, что является существенным преимуществом в сравнении с оригинальной деталью.",
+    "price": "44999",
+    "quantity": 4,
+    "image": "products_images/решетка_радиатора.png",
+    "category": 1
+  }
+  },
+  {"model": "products.product",
+    "pk": 3,
+    "fields": {
+      "name": "Решетка радиатора Tank 500",
+      "description": "Решетка радиатора для Tank 500",
+      "price": "47999",
+      "quantity": 5,
+      "image": "products_images/решетка_радиатора_tank500.png",
+      "category": 1
+    }
+  },
+  {"model": "products.product",
+    "pk": 4,
+    "fields": {
+      "name": "Амортизаторы дверей",
+      "description": "Подходят для багажника и дверей. Обеспечивают бесшумное и плавное закрытие дверей.",
+      "price": "499",
+      "quantity": 7,
+      "image": "products_images/амортизаторы_дверей.png",
+      "category": 1
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 5,
+    "fields": {
+      "name": "Комплект дверных ручек",
+      "description": "Комплект дверных ручек, для четырех боковых дверей. Выполнены в черном глубоком глянцевом цвете, хромированные. В комплекте идут с креплением.",
+      "price": "3499",
+      "quantity": 3,
+      "image": "products_images/дверная_ручка.png",
+      "category": 1
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 6,
+    "fields": {
+      "name": "Накладка эмблемы решетки радиатора Tank 300",
+      "description": "Придаст вашему Tank 300 брутальный, стильный вид.",
+      "price": "2999",
+      "quantity": 2,
+      "image": "products_images/накладка_эмблемы_решетки-радиатора_танк300.png",
+      "category": 1
+    }
+  }
+, {
+  "model": "products.product",
+  "pk": 7,
+  "fields": {
+    "name": "Крышка для замка",
+    "description": "Изготовлены из высококачественной нержавеющей стали и АБС-пластика.",
+    "price": "3499",
+    "quantity": 8,
+    "image": "products_images/крышка_для_замка.png",
+    "category": 2
+  }
+},
+  {
+    "model": "products.product",
+    "pk": 8,
+    "fields": {
+      "name": "Обложка для водительского удостоверения",
+      "description": "Многофункциональное портмоне: для водительского удостоверения, дисконтных и банковских карт.",
+      "price": "899",
+      "quantity": 9,
+      "image": "products_images/spare_wheelshell.png",
+      "category": 2
+    }
+  }
+]

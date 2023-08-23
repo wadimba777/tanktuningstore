@@ -1,0 +1,92 @@
+{% extends 'products/base.html' %}
+{% load static %}
+
+{% block css %}
+    <link href="{% static 'vendor/css/profile.css' %}" rel="stylesheet">
+{% endblock %}
+{% block contact_me %}  <a class="nav-link" href="#contacts">Связаться с нами</a> {% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7">
+                <h4 class="mt-3 mb-3">Профиль</h4>
+                <div class="col-lg-12 text-center">
+                    <img width="100" height="100"
+                         src="{% if user.image %} {{ user.image.url }} {% else %} {% static 'vendor/img/users/default_avatar.jpg' %} {% endif %}"
+                         class="img-thumbnail">
+                </div>
+                <form action="{% url 'users:profile' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="small mb-1" for="{{ form.first_name.id_for_label }}">Имя</label>
+                                {{ form.first_name }}
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="small mb-1" for="{{ form.last_name.id_for_label }}">Фамилия</label>
+                                {{ form.last_name }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row mb-2">
+                        <div class="col-lg-12">
+                            <div class="custom-file">
+                                {{ form.image }}
+                                <label class="custom-file-label" for="{{ form.image.id_for_label }}">Выберите изображение</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-lg-6">
+                            <label class="small mb-1" for="{{ form.username.id_for_label }}">Имя пользователя</label>
+                            {{ form.username }}
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="small mb-1" for="{{ form.email.id_for_label }}">Адрес электронной
+                                почты</label>
+                            {{ form.email }}
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-lg-12" style="margin-top: 33px;">
+                            <input class="btn btn-info btn-block" type="submit" value="Сохранить">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-5">
+                {% include 'products/baskets.html' %}
+
+            </div>
+        </div>
+    </div>
+<p>ㅤ</p>
+<p>ㅤ</p>
+<p>ㅤ</p>
+<p>ㅤ</p>
+<p>ㅤ</p>
+
+{% endblock %}
+
+{% block footer %}
+    <footer class="py-5 bg-dark ">
+        <div class="container ">
+            <h5 id="contacts" class="m-0  text-center text-white"><b>Контакты:</b> <br> +7(812)987-18-69 <br> +7(952)287-18-69</h5>
+            <div class="m-0  text-center text-whiten ">
+                <a href="https://wa.me/7123456789"><img src="{% static 'vendor/img/whatsapp-logo.png' %}">
+                &nbsp;
+                <a href="https://web.telegram.org/">
+                    <img src="{% static 'vendor/img/tg-image-color.png' %}"/>
+                &nbsp;
+                <a href="https://www.avito.ru/user/13487b14127cd8e68481566569302874/profile?id=3182369205&src=item&page_from=from_item_card&iid=3182369205">
+                    <img src="{% static 'vendor/img/avito-logo.png' %}"/></a>
+            </div>
+
+            <p class="m-0 text-center text-white">Copyright &copy; TankTuningSPB 2023</p>
+
+        </div>
+    </footer>
+{% endblock %}
