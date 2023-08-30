@@ -4,7 +4,8 @@
 {% block css %}
     <link href="{% static 'vendor/css/products.css' %}" rel="stylesheet">
 {% endblock %}
-{% block contact_me %}  <a class="nav-link" href="#contacts">Связаться с нами</a> {% endblock %}
+{% block contact_me %}
+    <a class="dropdown-item" href="#contacts">Связаться с нами</a> {% endblock %}
 {% block content %}
     <div class="container">
 
@@ -17,7 +18,9 @@
 
                 <div class="list-group">
                     {% for category in categories %}
-                        <a href="#" class="list-group-item">{{ category.name }}</a>
+                        <a href="{% url 'products:category' category.id %}" class="list-group-item">
+                            {{ category.name }}
+                        </a>
                     {% endfor %}
                 </div>
 
@@ -55,7 +58,7 @@
 
                 <div class="row">
 
-                    {% for product in products %}
+                    {% for product in object_list %}
                         <div class="col-lg-4 col-md-6 mb-4">
                         <div class="card h-100">
                             <a href="#">
@@ -83,21 +86,30 @@
 
 
                 </div>
-
-                <nav aria-label="Page navigation example">
+                {% if is_paginated %}
+                    <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-center">
-                        <li class="page-item disabled">
-                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Пред. стр.</a>
+                        <li class="page-item {% if not page_obj.has_previous %} disabled {% endif %}">
+                            <a class="page-link" href="{% if page_obj.has_previous %} {% url 'products:paginator' page_obj.previous_page_number %} {% else %} # {% endif %}"
+                               tabindex="-1" aria-disabled="true">
+                                Предыдущая.
+                            </a>
                         </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">След. стр.</a>
+                        {% for page in paginator.page_range %}
+                            <li class="page-item">
+                                <a class="page-link" href="{% url 'products:paginator' page %}">
+                                    {{ page }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                        <li class="page-item {% if not page_obj.has_next %} disabled {% endif %}">
+                            <a class="page-link" href="{% if page_obj.has_next %} {% url 'products:paginator' page_obj.next_page_number %} {% else %} # {% endif %}">
+                                Следующая.
+                            </a>
                         </li>
                     </ul>
                 </nav>
-
+                {% endif %}
             </div>
 
         </div>
@@ -106,9 +118,10 @@
 {% endblock %}
 
 {% block footer %}
-    <footer class="py-5 bg-dark">
+    <footer class="py-3 bg-dark">
         <div class="container">
-            <h5 id="contacts" class="m-0 text-center text-white"><b>Контакты:</b> <br> +7(812)987-18-69 <br> +7(952)287-18-69</h5>
+            <h4 id="contacts" class="m-0 text-center text-white"><br><b>Контакты:</b> <br><br> +7(812)987-18-69 <br> +7(952)287-18-69</h4>
+            <br>
             <div class="m-0 text-center text-whiten">
                 <a href="https://wa.me/7123456789"><img src="{% static 'vendor/img/whatsapp-logo.png' %}">
                 &nbsp;
@@ -118,7 +131,7 @@
                 <a href="https://www.avito.ru/user/13487b14127cd8e68481566569302874/profile?id=3182369205&src=item&page_from=from_item_card&iid=3182369205">
                     <img src="{% static 'vendor/img/avito-logo.png' %}"/></a>
             </div>
-
+            <br>
             <p class="m-0 text-center text-white">Copyright &copy; TankTuningSPB 2023</p>
 
         </div>

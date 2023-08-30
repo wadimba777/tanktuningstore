@@ -4,7 +4,7 @@
 {% block css %}
     <link href="{% static 'vendor/css/profile.css' %}" rel="stylesheet">
 {% endblock %}
-{% block contact_me %}  <a class="nav-link" href="#contacts">Связаться с нами</a> {% endblock %}
+{% block contact_me %}  <a class="dropdown-item" href="#contacts">Связаться с нами</a> {% endblock %}
 {% block content %}
     <div class="container">
         <div class="row">
@@ -15,7 +15,7 @@
                          src="{% if user.image %} {{ user.image.url }} {% else %} {% static 'vendor/img/users/default_avatar.jpg' %} {% endif %}"
                          class="img-thumbnail">
                 </div>
-                <form action="{% url 'users:profile' %}" method="post" enctype="multipart/form-data">
+                <form action="{% url 'users:profile' user.id %}" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="form-row">
                         <div class="col-lg-6">
@@ -69,13 +69,15 @@
 <p>ㅤ</p>
 <p>ㅤ</p>
 
+
 {% endblock %}
 
 {% block footer %}
-    <footer class="py-5 bg-dark ">
-        <div class="container ">
-            <h5 id="contacts" class="m-0  text-center text-white"><b>Контакты:</b> <br> +7(812)987-18-69 <br> +7(952)287-18-69</h5>
-            <div class="m-0  text-center text-whiten ">
+    <footer class="py-4 bg-dark">
+        <div class="container">
+            <h4 id="contacts" class="m-0 text-center text-white"><br><b>Контакты:</b> <br><br> +7(812)987-18-69 <br> +7(952)287-18-69</h4>
+            <br>
+            <div class="m-0 text-center text-whiten">
                 <a href="https://wa.me/7123456789"><img src="{% static 'vendor/img/whatsapp-logo.png' %}">
                 &nbsp;
                 <a href="https://web.telegram.org/">
@@ -84,7 +86,7 @@
                 <a href="https://www.avito.ru/user/13487b14127cd8e68481566569302874/profile?id=3182369205&src=item&page_from=from_item_card&iid=3182369205">
                     <img src="{% static 'vendor/img/avito-logo.png' %}"/></a>
             </div>
-
+            <br>
             <p class="m-0 text-center text-white">Copyright &copy; TankTuningSPB 2023</p>
 
         </div>

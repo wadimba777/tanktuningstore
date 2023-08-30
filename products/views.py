@@ -1,20 +1,31 @@
-from django.shortcuts import render, HttpResponseRedirect
+from django.shortcuts import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
+from django.views.generic.base import TemplateView
+from django.views.generic.list import ListView
+
 from products.models import ProductsCategory, Product, Basket
+from common.views import TitleMixin
+class IndexView(TitleMixin,TemplateView):
+    template_name = 'products/index.html'
+    title = 'TankTuning'
 
-# Create your views here.
-def index(request):
-    context = {'title': 'TankTuning',
-    }
-    return render(request, 'products/index.html', context)
+class ProductsListView(TitleMixin, ListView):
+    model = Product
+    template_name = 'products/products.html'
+    paginate_by = 9
+    title = 'TankTuning - Каталог'
 
-def products(request):
-    context = {
-        'title': 'TankTuning - Каталог',
-        'products': Product.objects.all(),
-        'categories': ProductsCategory.objects.all(),
-    }
-    return render(request, 'products/products.html', context)
+    def get_queryset(self):
+        queryset = super(ProductsListView, self).get_queryset()
+        category_id = self.kwargs.get('category_id')
+        return queryset.filter(category_id=category_id) if category_id else queryset
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(ProductsListView, self).get_context_data()
+        context['categories'] = ProductsCategory.objects.all()
+        return context
+
+
+
 @login_required
 def basket_add(request, product_id):
     product = Product.objects.get(id=product_id)
