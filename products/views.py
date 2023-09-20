@@ -1,13 +1,17 @@
-from django.shortcuts import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import HttpResponseRedirect
 from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
+from django.core.cache import cache
 
-from products.models import ProductsCategory, Product, Basket
 from common.views import TitleMixin
-class IndexView(TitleMixin,TemplateView):
+from products.models import Basket, Product, ProductsCategory
+
+
+class IndexView(TitleMixin, TemplateView):
     template_name = 'products/index.html'
     title = 'TankTuning'
+
 
 class ProductsListView(TitleMixin, ListView):
     model = Product
@@ -19,12 +23,16 @@ class ProductsListView(TitleMixin, ListView):
         queryset = super(ProductsListView, self).get_queryset()
         category_id = self.kwargs.get('category_id')
         return queryset.filter(category_id=category_id) if category_id else queryset
+
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(ProductsListView, self).get_context_data()
-        context['categories'] = ProductsCategory.objects.all()
+        categories = cache.get('categories')
+        if not categories:
+            context['categories'] = ProductsCategory.objects.all()
+            cache.set('categories', context['categories'], 30)
+        else:
+            context['categories'] = categories
         return context
-
-
 
 @login_required
 def basket_add(request, product_id):
@@ -39,6 +47,8 @@ def basket_add(request, product_id):
         basket.save()
 
     return HttpResponseRedirect(request.META['HTTP_REFERER'])
+
+
 @login_required
 def basket_remove(request, basket_id):
     basket = Basket.objects.get(id=basket_id)
