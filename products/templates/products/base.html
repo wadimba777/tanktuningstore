@@ -58,7 +58,8 @@
                          </li>
 
                               <li>
-                                  <a class="dropdown-item" href="orders/orders.html">Заказы</a></li>
+                                  <a class="dropdown-item" href="{% url 'orders:orders_list' %}">Заказы</a>
+                              </li>
                         {% block contact_me %}   {% endblock %}
                               {% if user.is_superuser or user.is_staff %}
                               <li>

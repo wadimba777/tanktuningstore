@@ -1,8 +1,11 @@
-from celery import shared_task
-from django.utils.timezone import now
 import uuid
 from datetime import timedelta
-from users.models import User, EmailVerification
+
+from celery import shared_task
+from django.utils.timezone import now
+
+from users.models import EmailVerification, User
+
 
 @shared_task
 def send_email_verification(user_id):
