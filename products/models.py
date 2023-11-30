@@ -4,6 +4,7 @@ from django.db import models
 
 from users.models import User
 
+
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
@@ -44,7 +45,8 @@ class Product(models.Model):
     def create_stripe_product_price(self):
         stripe_product = stripe.Product.create(name=self.name)
         stripe_product_price = stripe.Price.create(
-            product=stripe_product['id'], unit_amount=round(self.price * 100), currency='rub')
+            product=stripe_product['id'], unit_amount=round(self.price * 100), currency='rub'
+        )
         return stripe_product_price
 
 
@@ -88,18 +90,3 @@ class Basket(models.Model):
             'sum': float(self.sum()),
         }
         return basket_item
-
-    @classmethod
-    def create_or_update(cls, product_id, user):
-        baskets = Basket.objects.filter(user=user, product_id=product_id)
-
-        if not baskets.exists():
-            obj = Basket.objects.create(user=user, product_id=product_id, quantity=1)
-            is_created = True
-            return obj, is_created
-        else:
-            basket = baskets.first()
-            basket.quantity += 1
-            basket.save()
-            is_created = False
-            return basket, is_created

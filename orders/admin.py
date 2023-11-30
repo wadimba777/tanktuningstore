@@ -9,7 +9,7 @@ class OrderAdmin(admin.ModelAdmin):
     fields = (
         'id', 'created',
         ('first_name', 'last_name'),
-        ('email', 'address', 'phone'),
+        ('email', 'address'),
         'basket_history', 'status', 'initiator',
     )
     readonly_fields = ('id', 'created')

@@ -1,6 +1,6 @@
 {% extends 'products/base.html' %}
 {% load humanize %}
-
+{% load static %}
 {% block content %}
     <section>
         <div class="alert alert-warning text-center" role="alert">
@@ -8,11 +8,14 @@
         </div>
         <div class="container">
             <div class="py-5 text-center">
-                <h1>Оформление заказа</h1>
+                <h1>Просим прощения, система оплаты на сайте временно не работает.</h1>
             </div>
-            <div class="row g-5">
-                <div class="col-md-5 col-lg-4 order-md-last">
-                    <h4 class="d-flex justify-content-between align-items-center mb-3">
+
+                <div class="m-0 text-center text-black">
+
+                    <div>
+                        <h3 class="m-0 text-center text-black"> Чтобы сделать заказ пожалуйста свяжитесь с нами по номеру телефона или отправьте скриншот страницы с корзиной </h3>
+                        <h4 class="d-flex justify-content-between align-items-center mb-3">
                         <span class="text-primary">Корзина</span>
                         <span class="badge badge-primary badge-pill text-white">{{ baskets.total_quantity }}</span>
                     </h4>
@@ -31,40 +34,49 @@
                             <strong>{{ baskets.total_sum|intcomma }} руб.</strong>
                         </li>
                     </ul>
-                </div>
-                <div class="col-md-7 col-lg-8">
-                    <h4 class="mb-3">Адрес доставки</h4>
-                    <form action="{% url 'orders:order_create' %}" method="post">
-                        {% csrf_token %}
-                        <div class="row g-3">
-                            <div class="col-sm-6">
-                                <label for="{{ form.first_name.id_for_label }}" class="form-label">Имя</label>
-                                {{ form.first_name }}
+                        <h4 id="contacts" class="m-0 text-center text-black"><br><b>Наши контакты:</b> <br><br> +7(812)987-18-69 <br> +7(952)287-18-69</h4>
+            <br>
+            <div class="m-0 text-center text-whiten">
+                <a href="https://wa.me/7123456789"><img src="{% static 'vendor/img/whatsapp-logo.png' %}">
+                &nbsp;
+                <a href="https://web.telegram.org/">
+                    <img src="{% static 'vendor/img/tg-image-color.png' %}"/>
+                &nbsp;
+                <a href="https://www.avito.ru/user/13487b14127cd8e68481566569302874/profile?id=3182369205&src=item&page_from=from_item_card&iid=3182369205">
+                    <img src="{% static 'vendor/img/avito-logo.png' %}"/></a>
+
+
+
+<!--                    <h4 class="mb-3">Адрес доставки</h4>-->
+<!--                    <form action="{% url 'orders:order_create' %}" method="post">-->
+<!--                        {% csrf_token %}-->
+<!--                        <div class="row g-3">-->
+<!--                            <div class="col-sm-6">-->
+<!--                                <label for="{{ form.first_name.id_for_label }}" class="form-label">Имя</label>-->
+<!--                                {{ form.first_name }}-->
+<!--                            </div>-->
+
+<!--                            <div class="col-sm-6">-->
+<!--                                <label for="{{ form.last_name.id_for_label }}" class="form-label">Фамилия</label>-->
+<!--                                {{ form.last_name }}-->
+<!--                            </div>-->
+
+<!--                            <div class="col-12 mt-3">-->
+<!--                                <label for="{{ form.email.id_for_label }}" class="form-label">Адрес электронной-->
+<!--                                    почты</label>-->
+<!--                                {{ form.email }}-->
+<!--                            </div>-->
+
+<!--                            <div class="col-12 mt-3">-->
+<!--                                <label for="{{ form.email.address }}" class="form-label">Адрес</label>-->
+<!--                                {{ form.address }}-->
                             </div>
 
-                            <div class="col-sm-6">
-                                <label for="{{ form.last_name.id_for_label }}" class="form-label">Фамилия</label>
-                                {{ form.last_name }}
-                            </div>
 
-                            <div class="col-12 mt-3">
-                                <label for="{{ form.email.id_for_label }}" class="form-label">Адрес эл. почты</label>
-                                {{ form.email }}
-                            </div>
-
-                            <div class="col-12 mt-3">
-                                <label for="{{ form.address.id_for_label }}" class="form-label">Адрес</label>
-                                {{ form.address }}
-                            </div>
-                            <div class="col-11 mt-3">
-                                <label for="{{ form.phone.id_for_label }}" class="form-label">Номер телефона</label>
-                                {{ form.phone }}
-                            </div>
                         </div>
 
-                        <hr class="my-4">
 
-                        <button class="w-100 btn btn-primary btn-lg" type="submit">Продолжить</button>
+
                     </form>
                 </div>
             </div>

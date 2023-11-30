@@ -27,6 +27,7 @@ env = environ.Env(
     DATABASE_HOST=(str),
     DATABASE_PORT=(str),
 
+    EMAIL_BACKEND=(str),
     EMAIL_HOST=(str),
     EMAIL_PORT=(int),
     EMAIL_USE_SSL=(bool),
@@ -114,8 +115,8 @@ TEMPLATES = [
 WSGI_APPLICATION = 'tankstore.wsgi.application'
 
 INTERNAL_IPS = [
-    "127.0.0.1",
-    'localhost'
+    '127.0.0.1',
+    'localhost',
 ]
 # Redis
 REDIS_HOST = env('REDIS_HOST')
@@ -136,13 +137,13 @@ CACHES = {
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": "tanktuning_db",
-        "USER": "tanktuning_username",
-        "PASSWORD": "iLovetank300",
-        "HOST": "localhost",
-        "PORT": "5432",
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': env('DATABASE_NAME'),
+        'USER': env('DATABASE_USER'),
+        'PASSWORD': env('DATABASE_PASSWORD'),
+        'HOST': env('DATABASE_HOST'),
+        'PORT': env('DATABASE_PORT'),
     }
 }
 
@@ -169,7 +170,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'ru-RU'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
 
@@ -181,9 +182,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (
-    BASE_DIR / 'static',
-)
+if not DEBUG:
+    STATICFILES_DIRS = (
+        BASE_DIR / 'static',
+    )
+else:
+    STATIC_ROOT = BASE_DIR / 'static'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
@@ -210,6 +214,7 @@ else:
     EMAIL_USE_SSL = env('EMAIL_USE_SSL')
     EMAIL_HOST_USER = env('EMAIL_HOST_USER')
     EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+    EMAIL_BACKEND = env('EMAIL_BACKEND')
 
 
 # Oauth

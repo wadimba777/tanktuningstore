@@ -2,8 +2,6 @@ from django.db import models
 
 from products.models import Basket
 from users.models import User
-from phonenumber_field.modelfields import PhoneNumberField
-
 
 class Order(models.Model):
     CREATED = 0
@@ -24,7 +22,6 @@ class Order(models.Model):
     basket_history = models.JSONField(default=dict)
     created = models.DateTimeField(auto_now_add=True)
     status = models.SmallIntegerField(default=CREATED, choices=STATUSES)
-    phone = PhoneNumberField(null=False, blank=False, unique=True)
     initiator = models.ForeignKey(to=User, on_delete=models.CASCADE)
 
     def __str__(self):
